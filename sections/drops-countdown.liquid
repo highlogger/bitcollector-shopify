@@ -1,0 +1,127 @@
+{% comment %}
+  Geri sayım sayacı ve drop bildirim kayıt formu.
+{% endcomment %}
+
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-surface-950 relative overflow-hidden js-countdown-section" data-target-date="{{ section.settings.target_date }}">
+  <!-- Glow highlight -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[30rem] h-[30rem] rounded-full bg-electric-blue/5 blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-5xl mx-auto bg-white/[0.01] border border-white/[0.04] p-8 sm:p-12 rounded-3xl relative z-10 backdrop-blur-sm">
+    
+    <!-- Success Alert (Shown via JS when form is submitted) -->
+    <div class="absolute top-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 p-4 rounded-xl shadow-lg backdrop-blur-md hidden js-countdown-success">
+      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span class="text-xs sm:text-sm font-semibold">Hatırlatıcı Kuruldu! SMS & E-posta Bildirimi Gönderilecek.</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      <!-- Text block -->
+      <div class="lg:col-span-6 space-y-4 text-center lg:text-left">
+        {%- if section.settings.badge != blank -%}
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-electric-blue/10 border border-electric-blue/20">
+            <svg class="w-3.5 h-3.5 text-electric-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/><path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5Z"/><path d="M19 17l1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z"/></svg>
+            <span class="text-[10px] font-bold tracking-widest text-electric-blue uppercase">{{ section.settings.badge }}</span>
+          </div>
+        {%- endif -%}
+        <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight font-sans">
+          {{ section.settings.title }}
+        </h2>
+        <p class="text-xs sm:text-sm text-silver leading-relaxed max-w-md mx-auto lg:mx-0">
+          {{ section.settings.description }}
+        </p>
+
+        <!-- Notification form -->
+        {%- form 'customer', class: 'pt-4 flex flex-col sm:flex-row gap-2 max-w-md mx-auto lg:mx-0 js-countdown-form' -%}
+          <input type="hidden" name="contact[tags]" value="drop-reminder">
+          <input
+            required
+            type="email"
+            name="contact[email]"
+            placeholder="E-posta Adresiniz"
+            class="flex-grow bg-white/[0.02] border border-white/[0.08] focus:border-electric-blue rounded-xl p-3.5 text-xs sm:text-sm text-soft-white outline-none"
+          />
+          <button
+            type="submit"
+            class="btn-primary py-3.5 px-6 text-xs sm:text-sm font-bold flex items-center justify-center gap-2"
+          >
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+            Bildirim Al
+          </button>
+        {%- endform -%}
+      </div>
+
+      <!-- Countdown Clock Grid -->
+      <div class="lg:col-span-6 flex justify-center items-center">
+        <div class="grid grid-cols-4 gap-3 sm:gap-4 w-full max-w-sm">
+          <div class="flex flex-col items-center p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] rounded-2xl relative group hover:border-white/[0.12] transition-colors">
+            <span class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-sans js-days">
+              00
+            </span>
+            <span class="text-[9px] text-muted tracking-wider mt-1 uppercase font-semibold">
+              GÜN
+            </span>
+          </div>
+          <div class="flex flex-col items-center p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] rounded-2xl relative group hover:border-white/[0.12] transition-colors">
+            <span class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-sans js-hours">
+              00
+            </span>
+            <span class="text-[9px] text-muted tracking-wider mt-1 uppercase font-semibold">
+              SAAT
+            </span>
+          </div>
+          <div class="flex flex-col items-center p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] rounded-2xl relative group hover:border-white/[0.12] transition-colors">
+            <span class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-sans js-minutes">
+              00
+            </span>
+            <span class="text-[9px] text-muted tracking-wider mt-1 uppercase font-semibold">
+              DAKİKA
+            </span>
+          </div>
+          <div class="flex flex-col items-center p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] rounded-2xl relative group hover:border-white/[0.12] transition-colors">
+            <span class="text-2xl sm:text-4xl font-bold tracking-tight text-white font-sans js-seconds">
+              00
+            </span>
+            <span class="text-[9px] text-muted tracking-wider mt-1 uppercase font-semibold">
+              SANİYE
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Drop Geri Sayımı",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Rozet Metni",
+      "default": "LİMİTLİ STOK"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Gelecek Drop: Obsidian Flames"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Açıklama",
+      "default": "Obsidian Flames Özel İllüstrasyon Nadir Kartları ve Booster Box Drop Yayını"
+    },
+    {
+      "type": "text",
+      "id": "target_date",
+      "label": "Hedef Tarih (Format: YYYY-MM-DD HH:MM:SS)",
+      "default": "2026-06-15 20:00:00"
+    }
+  ]
+}
+{% endschema %}

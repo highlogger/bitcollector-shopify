@@ -1,0 +1,166 @@
+{% comment %}
+  Cinematic Hero section with animated particle floating elements, glass badges, and stats columns.
+{% endcomment %}
+
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-surface-950 px-4 sm:px-6 lg:px-8 py-20 js-hero-section">
+  
+  <!-- Background Cinematic Orbs -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[35rem] h-[35rem] rounded-full bg-electric-blue/10 blur-[120px] animate-pulse" style="animation-duration: 8s;"></div>
+    <div class="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[35rem] h-[35rem] rounded-full bg-soft-purple/10 blur-[120px] animate-pulse" style="animation-duration: 12s;"></div>
+  </div>
+
+  <!-- Deterministic Particle Layer (handled by CSS keyframes on load) -->
+  <div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 15%; left: 10%; width: 4px; height: 4px; animation-delay: 0s; animation-duration: 6s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 25%; left: 80%; width: 6px; height: 6px; animation-delay: 1s; animation-duration: 7s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 45%; left: 15%; width: 3px; height: 3px; animation-delay: 0.5s; animation-duration: 5s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 55%; left: 85%; width: 5px; height: 5px; animation-delay: 1.5s; animation-duration: 8s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 75%; left: 20%; width: 4px; height: 4px; animation-delay: 0.2s; animation-duration: 6s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 85%; left: 70%; width: 3px; height: 3px; animation-delay: 1.2s; animation-duration: 5s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 35%; left: 50%; width: 5px; height: 5px; animation-delay: 0.8s; animation-duration: 7s;"></div>
+    <div class="absolute rounded-full bg-soft-white/30 animate-float" style="top: 65%; left: 40%; width: 4px; height: 4px; animation-delay: 2.1s; animation-duration: 9s;"></div>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+    <div class="flex flex-col items-center">
+      
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.06] mb-8 animate-fade-in-up">
+        <svg class="w-4 h-4 text-electric-blue animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/><path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5Z"/><path d="M19 17l1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z"/></svg>
+        <span class="text-[10px] font-semibold tracking-widest text-silver uppercase">
+          {{ section.settings.subtitle }}
+        </span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-soft-white mb-6 max-w-4xl leading-tight">
+        {{ section.settings.title }}
+      </h1>
+
+      <!-- Subheading -->
+      <p class="text-base sm:text-lg lg:text-xl text-silver max-w-3xl leading-relaxed mb-12">
+        {{ section.settings.description }}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-center w-full max-w-md sm:max-w-none">
+        <a 
+          href="{{ section.settings.cta_link }}" 
+          class="btn-primary flex items-center justify-center gap-2 group"
+        >
+          <span>{{ section.settings.cta_text }}</span>
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        {%- if section.settings.secondary_cta_link != blank -%}
+          <a href="{{ section.settings.secondary_cta_link }}" class="btn-outline flex items-center justify-center">
+            {{ section.settings.secondary_cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Social Proof / Stats -->
+      <div class="grid grid-cols-3 gap-6 sm:gap-12 mt-20 pt-10 border-t border-white/[0.04] w-full max-w-2xl">
+        <div class="flex flex-col items-center">
+          <span class="text-2xl sm:text-3xl font-bold text-soft-white">{{ section.settings.stat1_value }}</span>
+          <span class="text-[10px] sm:text-xs text-muted mt-1 uppercase tracking-wider">{{ section.settings.stat1_label }}</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-2xl sm:text-3xl font-bold text-soft-white">{{ section.settings.stat2_value }}</span>
+          <span class="text-[10px] sm:text-xs text-muted mt-1 uppercase tracking-wider">{{ section.settings.stat2_label }}</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-2xl sm:text-3xl font-bold text-soft-white">{{ section.settings.stat3_value }}</span>
+          <span class="text-[10px] sm:text-xs text-muted mt-1 uppercase tracking-wider">{{ section.settings.stat3_label }}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Tanıtım Alanı (Hero)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Üst Başlık (Küçük)",
+      "default": "PREMIUM TCG KOLEKSİYON MAĞAZASI"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "Sıradanın Ötesini Koleksiyonla."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Açıklama Metni",
+      "default": "Pokémon TCG koleksiyonerleri ve yatırımcıları için Türkiye'nin en seçkin adresi. Nadir single kartlar, kapalı kutu ürünler ve premium koleksiyon aksesuarları."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Birincil Buton Yazısı",
+      "default": "Koleksiyonu Keşfet"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Birincil Buton Linki"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "İkincil Buton Yazısı",
+      "default": "Yeni Gelenler"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "İkincil Buton Linki"
+    },
+    {
+      "type": "text",
+      "id": "stat1_value",
+      "label": "İstatistik 1 Değer",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "İstatistik 1 Başlık",
+      "default": "Nadir Kart"
+    },
+    {
+      "type": "text",
+      "id": "stat2_value",
+      "label": "İstatistik 2 Değer",
+      "default": "4.9★"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "İstatistik 2 Başlık",
+      "default": "Güven Derecesi"
+    },
+    {
+      "type": "text",
+      "id": "stat3_value",
+      "label": "İstatistik 3 Değer",
+      "default": "24s"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "İstatistik 3 Başlık",
+      "default": "Hızlı Kargo"
+    }
+  ]
+}
+{% endschema %}

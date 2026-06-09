@@ -1,0 +1,174 @@
+{% comment %}
+  Renders the sticky header with Logo, Navigation Links, Search, Wishlist, Account, and Cart triggers.
+{% endcomment %}
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent js-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      
+      <!-- Logo -->
+      <a href="{{ routes.root_url }}" class="flex items-center gap-3 group">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 150 }}"
+            alt="{{ shop.name }}"
+            class="h-8 w-auto object-contain"
+            loading="eager"
+            width="{{ section.settings.logo.width }}"
+            height="{{ section.settings.logo.height }}"
+          >
+        {%- else -%}
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-electric-blue to-soft-purple flex items-center justify-center">
+            <span class="text-white font-bold text-sm">B</span>
+          </div>
+          <span class="text-soft-white font-semibold text-lg tracking-tight group-hover:text-white transition-colors">
+            {{ shop.name }}
+          </span>
+        {%- endif -%}
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-1">
+        {%- for link in linklists[section.settings.menu].links -%}
+          <div class="relative group/nav-item js-nav-item">
+            <a
+              href="{{ link.url }}"
+              class="flex items-center gap-1 px-4 py-2 text-sm text-silver hover:text-soft-white transition-colors duration-200 rounded-lg hover:bg-white/[0.04] js-nav-link"
+            >
+              {{ link.title }}
+              {%- if link.links.size > 0 -%}
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/nav-item:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              {%- endif -%}
+            </a>
+
+            {%- if link.links.size > 0 -%}
+              <div class="absolute top-full left-0 mt-2 w-72 glass rounded-2xl p-2 shadow-2xl shadow-black/40 opacity-0 invisible group-hover/nav-item:opacity-100 group-hover/nav-item:visible transition-all duration-200 transform translate-y-2 group-hover/nav-item:translate-y-0 z-50">
+                {%- for childlink in link.links -%}
+                  <a
+                    href="{{ childlink.url }}"
+                    class="flex flex-col gap-0.5 px-4 py-3 rounded-xl hover:bg-white/[0.04] transition-colors group/child"
+                  >
+                    <span class="text-sm text-soft-white font-medium group-hover/child:text-white">
+                      {{ childlink.title }}
+                    </span>
+                    {%- if childlink.description != blank -%}
+                      <span class="text-xs text-muted">
+                        {{ childlink.description }}
+                      </span>
+                    {%- endif -%}
+                  </a>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </nav>
+
+      <!-- Right Actions (Search, Wishlist, Account, Cart, Mobile Menu) -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        
+        <!-- Search Trigger -->
+        <button
+          type="button"
+          class="p-2.5 rounded-xl text-silver hover:text-soft-white hover:bg-white/[0.04] transition-all duration-200 js-search-trigger"
+          aria-label="{{ 'general.search' | t }}"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+
+        <!-- Wishlist -->
+        <a
+          href="/pages/wishlist"
+          class="relative p-2.5 rounded-xl text-silver hover:text-soft-white hover:bg-white/[0.04] transition-all duration-200 js-wishlist-indicator-link"
+          aria-label="Favorilerim"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-red-500 text-[10px] font-semibold text-white flex items-center justify-center hidden js-wishlist-count-badge">0</span>
+        </a>
+
+        <!-- Account Profile Link -->
+        <a
+          href="{{ routes.account_url }}"
+          class="p-2.5 rounded-xl text-silver hover:text-soft-white hover:bg-white/[0.04] transition-all duration-200"
+          aria-label="Müşteri Paneli"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+
+        <!-- Cart Trigger -->
+        <button
+          type="button"
+          class="relative p-2.5 rounded-xl text-silver hover:text-soft-white hover:bg-white/[0.04] transition-all duration-200 js-cart-drawer-trigger"
+          aria-label="{{ 'sections.cart.title' | t }}"
+        >
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-electric-blue text-[10px] font-semibold text-white flex items-center justify-center {% if cart.item_count == 0 %}hidden{% endif %} js-cart-count-badge">{{ cart.item_count }}</span>
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          type="button"
+          class="lg:hidden p-2.5 rounded-xl text-silver hover:text-soft-white hover:bg-white/[0.04] transition-all duration-200 js-mobile-menu-toggle"
+          aria-label="Mobil Menü Toggle"
+        >
+          <svg class="w-5 h-5 js-mobile-menu-icon-hamburger" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          <svg class="w-5 h-5 hidden js-mobile-menu-icon-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div class="fixed inset-0 z-40 lg:hidden hidden js-mobile-menu-drawer">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm js-mobile-menu-backdrop"></div>
+  <nav class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-surface-900 border-l border-white/[0.06] p-6 pt-20 overflow-y-auto transform translate-x-full transition-transform duration-300 ease-in-out js-mobile-menu-panel">
+    <div class="flex flex-col gap-1">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <div>
+          <a
+            href="{{ link.url }}"
+            class="flex items-center justify-between px-4 py-3 text-soft-white font-medium rounded-xl hover:bg-white/[0.04] transition-colors js-mobile-nav-link"
+          >
+            {{ link.title }}
+            {%- if link.links.size > 0 -%}
+              <svg class="w-4 h-4 text-muted js-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            {%- endif -%}
+          </a>
+          {%- if link.links.size > 0 -%}
+            <div class="ml-4 mt-1 flex flex-col gap-0.5 border-l border-white/[0.06] pl-4 hidden js-mobile-submenu">
+              {%- for childlink in link.links -%}
+                <a
+                  href="{{ childlink.url }}"
+                  class="px-3 py-2.5 text-sm text-silver hover:text-soft-white rounded-lg hover:bg-white/[0.04] transition-colors"
+                >
+                  {{ childlink.title }}
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Başlık (Header)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menü Seçimi",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

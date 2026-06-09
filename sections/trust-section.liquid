@@ -1,0 +1,151 @@
+{% comment %}
+  Renders trust pillars.
+{% endcomment %}
+
+<section class="section-padding bg-surface-950">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-semibold text-electric-blue uppercase tracking-widest block mb-3 animate-pulse">
+        {{ section.settings.badge | default: "NEDEN BIT COLLECTOR?" }}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text mb-4">
+        {{ section.settings.title | default: "Koleksiyonerlerin Güvendiği Adres" }}
+      </h2>
+      <p class="text-sm sm:text-base text-silver leading-relaxed">
+        {{ section.settings.subtitle | default: "Her siparişte üst düzey hizmet ve kusursuz kalite standartları." }}
+      </p>
+    </div>
+
+    <!-- Pillars Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <!-- Pillar 1 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-white/[0.12] transition-colors">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 border transition-transform duration-300 group-hover:scale-110 text-electric-blue bg-electric-blue/10 border-electric-blue/20">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6v7z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3 class="text-base font-semibold text-soft-white mb-3">
+          {{ section.settings.p1_title | default: "Orijinallik Garantisi" }}
+        </h3>
+        <p class="text-xs text-silver leading-relaxed">
+          {{ section.settings.p1_desc | default: "Tüm kartlar ve kapalı kutular listelenmeden önce uzman ekibimizce orijinallik kontrolünden geçer." }}
+        </p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-white/[0.12] transition-colors">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 border transition-transform duration-300 group-hover:scale-110 text-soft-purple bg-soft-purple/10 border-soft-purple/20">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" x2="12" y1="22.08" y2="12"/></svg>
+        </div>
+        <h3 class="text-base font-semibold text-soft-white mb-3">
+          {{ section.settings.p2_title | default: "Özel Zırhlı Paketleme" }}
+        </h3>
+        <p class="text-xs text-silver leading-relaxed">
+          {{ section.settings.p2_desc | default: "Koleksiyon değerini korumak için ultra korumalı, ezilmeye dayanıklı zırhlı kutularda paketleme." }}
+        </p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-white/[0.12] transition-colors">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 border transition-transform duration-300 group-hover:scale-110 text-pink-500 bg-pink-500/10 border-pink-500/20">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <h3 class="text-base font-semibold text-soft-white mb-3">
+          {{ section.settings.p3_title | default: "Koleksiyoner Odaklı" }}
+        </h3>
+        <p class="text-xs text-silver leading-relaxed">
+          {{ section.settings.p3_desc | default: "Koleksiyonculuğu anlıyor ve kart kondisyonlarına tam profesyonellikle yaklaşıyoruz." }}
+        </p>
+      </div>
+
+      <!-- Pillar 4 -->
+      <div class="glass-card p-6 rounded-2xl flex flex-col items-center text-center group hover:border-white/[0.12] transition-colors">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6 border transition-transform duration-300 group-hover:scale-110 text-emerald-500 bg-emerald-500/10 border-emerald-500/20">
+          <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="13" x="2" y="6" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M2 11h18"/></svg>
+        </div>
+        <h3 class="text-base font-semibold text-soft-white mb-3">
+          {{ section.settings.p4_title | default: "24 Saatte Kargo" }}
+        </h3>
+        <p class="text-xs text-silver leading-relaxed">
+          {{ section.settings.p4_desc | default: "Hafta içi verilen tüm siparişler 24 saat içinde korumalı kargo ile gönderilir." }}
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Güven Unsurları (Trust)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Üst Rozet",
+      "default": "NEDEN BIT COLLECTOR?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Ana Başlık",
+      "default": "Koleksiyonerlerin Güvendiği Adres"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Alt Başlık",
+      "default": "Her siparişte üst düzey hizmet ve kusursuz kalite standartları."
+    },
+    {
+      "type": "text",
+      "id": "p1_title",
+      "label": "Sütun 1 Başlık",
+      "default": "Orijinallik Garantisi"
+    },
+    {
+      "type": "textarea",
+      "id": "p1_desc",
+      "label": "Sütun 1 Açıklama",
+      "default": "Tüm kartlar ve kapalı kutular listelenmeden önce uzman ekibimizce orijinallik kontrolünden geçer."
+    },
+    {
+      "type": "text",
+      "id": "p2_title",
+      "label": "Sütun 2 Başlık",
+      "default": "Özel Zırhlı Paketleme"
+    },
+    {
+      "type": "textarea",
+      "id": "p2_desc",
+      "label": "Sütun 2 Açıklama",
+      "default": "Koleksiyon değerini korumak için ultra korumalı, ezilmeye dayanıklı zırhlı kutularda paketleme."
+    },
+    {
+      "type": "text",
+      "id": "p3_title",
+      "label": "Sütun 3 Başlık",
+      "default": "Koleksiyoner Odaklı"
+    },
+    {
+      "type": "textarea",
+      "id": "p3_desc",
+      "label": "Sütun 3 Açıklama",
+      "default": "Koleksiyonculuğu anlıyor ve kart kondisyonlarına tam profesyonellikle yaklaşıyoruz."
+    },
+    {
+      "type": "text",
+      "id": "p4_title",
+      "label": "Sütun 4 Başlık",
+      "default": "24 Saatte Kargo"
+    },
+    {
+      "type": "textarea",
+      "id": "p4_desc",
+      "label": "Sütun 4 Açıklama",
+      "default": "Hafta içi verilen tüm siparişler 24 saat içinde korumalı kargo ile gönderilir."
+    }
+  ]
+}
+{% endschema %}

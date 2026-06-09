@@ -1,0 +1,57 @@
+{
+  "general": {
+    "search": "Arama",
+    "search_placeholder": "Nadir kartları, kutuları ve aksesuarları arayın..."
+  },
+  "sections": {
+    "header": {
+      "announcement_title": "Duyurular",
+      "menu": "Menü",
+      "account": "Hesap",
+      "wishlist": "Favoriler"
+    },
+    "cart": {
+      "title": "Sepet",
+      "empty": "Sepetiniz boş.",
+      "continue_shopping": "Alışverişe Dön",
+      "subtotal": "Ara Toplam",
+      "checkout": "Ödeme Sayfasına Git",
+      "quantity_label": "Adet",
+      "remove": "Sil",
+      "free_shipping_message": "Ücretsiz kargo için [amount] kaldı.",
+      "free_shipping_success": "🎉 Ücretsiz Kargo Limitine Ulaştınız!",
+      "trust_badge_text": "Güvenli Checkout: SSL Şifreli & Orijinallik Garantili Alışveriş.",
+      "cart_error": "Sepet güncellenirken bir hata oluştu.",
+      "cart_quantity_error_html": "Sepete en fazla [quantity] adet ekleyebilirsiniz."
+    },
+    "product": {
+      "add_to_cart": "Sepete Ekle",
+      "buy_now": "Hemen Satın Al",
+      "out_of_stock": "Stokta Yok",
+      "in_stock": "Stokta Var",
+      "originality_label": "Orijinallik Garantili Ürün",
+      "originality_text": "Uzmanlarımız tarafından %100 orijinal olduğu doğrulanmıştır. Her kart korumalı kılıfı (sleeve) ve toploader ile gönderilmektedir.",
+      "shipping_label": "Korumalı Kargo & Zırhlı Paketleme",
+      "shipping_text": "Bu ürün özel zırhlı kargo kutusunda gönderilir. Siparişiniz 24 saat içinde kargoya teslim edilir. Jelatini açılmış kapalı kutu ürünlerinde iade kabul edilmemektedir.",
+      "description": "Ürün Açıklaması",
+      "shipping_tab": "Teslimat & İade",
+      "related_products": "İlginizi Çekebilecek Diğer Ürünler"
+    },
+    "filters": {
+      "title": "Filtreler",
+      "clear_all": "Temizle",
+      "sort_by": "Sırala",
+      "sort_options": {
+        "featured": "Öne Çıkanlar",
+        "price_asc": "Fiyat: Düşükten Yükseğe",
+        "price_desc": "Fiyat: Yüksekten Düşüğe",
+        "newest": "En Yeniler"
+      },
+      "categories": "Kategoriler",
+      "languages": "Kart Dili",
+      "rarities": "Kart Nadirliği",
+      "types": "Ürün Tipi",
+      "conditions": "Kondisyonlar"
+    }
+  }
+}

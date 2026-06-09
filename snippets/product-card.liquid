@@ -1,0 +1,183 @@
+{% comment %}
+  Renders a product card with 3D tilt effects, tags, prices, and quick action buttons.
+  Accepts:
+  - card_product: {Object} Product Liquid object (required)
+{% endcomment %}
+
+{%- liquid
+  assign condition = ''
+  assign language = ''
+  assign rarity = ''
+  assign is_new = false
+  assign gradient = 'linear-gradient(135deg, #1e1b4b 0%, #311042 100%)'
+
+  for tag in card_product.tags
+    if tag == 'Mint' or tag == 'Near Mint' or tag == 'Excellent' or tag == 'Good'
+      assign condition = tag
+    endif
+    if tag == 'Japonca' or tag == 'İngilizce' or tag == 'Çince' or tag == 'Japanese' or tag == 'English' or tag == 'Chinese'
+      assign language = tag
+    endif
+    if tag == 'Common' or tag == 'Uncommon' or tag == 'Rare' or tag == 'Double Rare' or tag == 'Ultra Rare' or tag == 'Special Illustration Rare' or tag == 'SAR' or tag == 'Promo' or tag == 'Holo' or tag == 'Secret Rare' or tag == 'Special Art'
+      assign rarity = tag
+    endif
+    if tag == 'Yeni' or tag == 'new'
+      assign is_new = true
+    endif
+  endfor
+
+  if rarity == 'Special Illustration Rare' or rarity == 'SAR' or rarity == 'Special Art' or rarity == 'Secret Rare'
+    assign gradient = 'linear-gradient(135deg, #3b0764 0%, #0f172a 100%)'
+  elsif rarity == 'Ultra Rare'
+    assign gradient = 'linear-gradient(135deg, #450a0a 0%, #0f172a 100%)'
+  endif
+
+  assign rarity_class = 'bg-rarity-rare/20 text-rarity-rare border-rarity-rare/30'
+  case rarity
+    when 'Common'
+      assign rarity_class = 'bg-rarity-common/20 text-rarity-common border-rarity-common/30'
+    when 'Uncommon'
+      assign rarity_class = 'bg-rarity-uncommon/20 text-rarity-uncommon border-rarity-uncommon/30'
+    when 'Rare', 'Holo', 'Double Rare'
+      assign rarity_class = 'bg-rarity-rare/20 text-rarity-rare border-rarity-rare/30'
+    when 'Ultra Rare'
+      assign rarity_class = 'bg-rarity-ultra/20 text-rarity-ultra border-rarity-ultra/30'
+    when 'Secret Rare'
+      assign rarity_class = 'bg-rarity-secret/20 text-rarity-secret border-rarity-secret/30'
+    when 'Special Art', 'Special Illustration Rare', 'SAR'
+      assign rarity_class = 'bg-rarity-special/20 text-rarity-special border-rarity-special/30'
+  endcase
+
+  assign lang_flag = '🇯🇵'
+  if language == 'İngilizce' or language == 'English'
+    assign lang_flag = '🇺🇸'
+  elsif language == 'Çince' or language == 'Chinese'
+    assign lang_flag = '🇨🇳'
+  endif
+-%}
+
+<div class="group card-perspective js-tilt-container" data-product-id="{{ card_product.id }}" data-product-url="{{ card_product.url }}">
+  <div 
+    class="glass-card card-shine refractor-sheen rounded-2xl overflow-hidden cursor-pointer h-full flex flex-col justify-between relative transition-all duration-200 ease-out js-tilt-element"
+    style="transform: rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1);"
+  >
+
+    <!-- Holographic light reflection -->
+    <div 
+      class="absolute inset-0 z-20 pointer-events-none mix-blend-color-dodge opacity-0 transition-opacity duration-300 js-tilt-glow"
+      style="background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);"
+    ></div>
+
+    <div>
+      <!-- Image Container -->
+      <div class="relative aspect-square overflow-hidden" style="background: {{ gradient }}">
+        <!-- Product Image -->
+        {%- if card_product.featured_media != blank -%}
+          <img
+            src="{{ card_product.featured_media | image_url: width: 400 }}"
+            alt="{{ card_product.featured_media.alt | escape }}"
+            width="{{ card_product.featured_media.width }}"
+            height="{{ card_product.featured_media.height }}"
+            loading="lazy"
+            class="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-110"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 bg-surface-800' }}
+        {%- endif -%}
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-electric-blue/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+        <!-- Badges -->
+        <div class="absolute top-3 left-3 z-20 flex flex-col gap-1.5 pointer-events-none">
+          {%- if rarity != blank -%}
+            <span class="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border backdrop-blur-sm {{ rarity_class }}">
+              {{ rarity }}
+            </span>
+          {%- endif -%}
+          {%- if is_new -%}
+            <span class="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-electric-blue/20 text-electric-blue border border-electric-blue/30 backdrop-blur-sm">
+              Yeni
+            </span>
+          {%- endif -%}
+          {%- unless card_product.available -%}
+            <span class="text-[9px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 backdrop-blur-sm">
+              Tükendi
+            </span>
+          {%- endunless -%}
+        </div>
+
+        {%- if language != blank -%}
+          <span class="absolute top-3 right-3 z-20 text-[9px] font-medium px-2 py-0.5 rounded-full bg-black/40 text-soft-white border border-white/[0.08] backdrop-blur-sm flex items-center gap-1 pointer-events-none">
+            {{ lang_flag }} {{ language }}
+          </span>
+        {%- endif -%}
+
+        <!-- Wishlist Toggle Button -->
+        <button
+          type="button"
+          class="absolute top-11 right-3 z-40 w-8 h-8 rounded-xl backdrop-blur-sm border flex items-center justify-center transition-all duration-300 bg-black/40 border-white/[0.08] text-silver hover:text-white hover:bg-black/60 js-wishlist-toggle"
+          data-product-handle="{{ card_product.handle }}"
+          aria-label="Favorilere Ekle"
+        >
+          <svg class="w-3.5 h-3.5 transition-transform active:scale-125" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </button>
+
+        <!-- Quick Actions -->
+        <div class="absolute bottom-3 right-3 z-40 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+          <button
+            type="button"
+            class="w-9 h-9 rounded-xl glass flex items-center justify-center text-soft-white hover:bg-white/10 transition-colors js-quick-view-btn"
+            data-product-handle="{{ card_product.handle }}"
+            aria-label="Hızlı Bakış"
+          >
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+          {%- if card_product.available -%}
+            <button
+              type="button"
+              class="w-9 h-9 rounded-xl bg-electric-blue flex items-center justify-center text-white hover:bg-glow-blue transition-colors js-add-to-cart-btn"
+              data-variant-id="{{ card_product.first_available_variant.id }}"
+              aria-label="Sepete Ekle"
+            >
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="p-4">
+        {%- if card_product.vendor != blank -%}
+          <p class="text-[10px] text-muted uppercase tracking-wider mb-1">{{ card_product.vendor }}</p>
+        {%- endif -%}
+        <h3 class="text-xs sm:text-sm font-medium text-soft-white group-hover:text-white transition-colors line-clamp-1 mb-2">
+          {{ card_product.title }}
+        </h3>
+        <div class="flex items-center gap-2">
+          <span class="text-sm sm:text-base font-semibold {% if card_product.available %}text-soft-white{% else %}text-silver/55{% endif %}">
+            {{ card_product.price | money }}
+          </span>
+          {%- if card_product.compare_at_price > card_product.price -%}
+            <span class="text-xs text-muted line-through">
+              {{ card_product.compare_at_price | money }}
+            </span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if condition != blank -%}
+      <div class="px-4 pb-4">
+        <p class="text-[10px] text-silver border-t border-white/[0.04] pt-2">
+          Kondisyon: <span class="text-soft-white font-medium">{{ condition }}</span>
+        </p>
+      </div>
+    {%- endif -%}
+
+    <!-- Card Click Link Overlay (covers entire card except z-40 buttons) -->
+    <a href="{{ card_product.url }}" class="absolute inset-0 z-30 block cursor-pointer" aria-label="{{ card_product.title | escape }}"></a>
+  </div>
+</div>

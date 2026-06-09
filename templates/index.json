@@ -1,0 +1,72 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "Nadir TCG Koleksiyonları",
+        "subtitle": "Apple × StockX Premium Collector Estetiği",
+        "description": "Dünyanın en değerli kartları, orijinal lisanslı kapalı kutu ürünler ve koleksiyonunuzu koruyacak birinci sınıf aksesuarlar tek bir adreste.",
+        "cta_text": "Koleksiyonu Keşfet",
+        "cta_link": "/collections/all"
+      }
+    },
+    "featured-singles": {
+      "type": "featured-singles",
+      "settings": {
+        "title": "Nadir & Değerli Kartlar",
+        "badge": "ÖNE ÇIKAN SİNGLE KARTLAR",
+        "collection": "all",
+        "limit": 6
+      }
+    },
+    "sealed-collections": {
+      "type": "sealed-collections",
+      "settings": {
+        "title": "Kapalı Kutular",
+        "badge": "KAPALI KUTU KOLEKSİYONU",
+        "collection": "all",
+        "limit": 4
+      }
+    },
+    "accessories-collections": {
+      "type": "accessories-collections",
+      "settings": {
+        "title": "Premium Aksesuarlar",
+        "badge": "KOLEKSİYONERİN ESASLARI",
+        "collection": "all",
+        "limit": 4
+      }
+    },
+    "drops-countdown": {
+      "type": "drops-countdown",
+      "settings": {
+        "title": "Gelecek Drop: Obsidian Flames",
+        "badge": "LİMİTLİ STOK",
+        "description": "Obsidian Flames Özel İllüstrasyon Nadir Kartları ve Booster Box Drop Yayını",
+        "target_date": "2026-06-15 20:00:00"
+      }
+    },
+    "recently-added": {
+      "type": "recently-added",
+      "settings": {
+        "title": "Son Eklenenler",
+        "badge": "AZ ÖNCE EKLENDİ",
+        "collection": "all",
+        "limit": 6
+      }
+    },
+    "trust-section": {
+      "type": "trust-section",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "featured-singles",
+    "sealed-collections",
+    "accessories-collections",
+    "drops-countdown",
+    "recently-added",
+    "trust-section"
+  ]
+}

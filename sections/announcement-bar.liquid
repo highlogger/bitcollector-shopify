@@ -1,0 +1,63 @@
+{% comment %}
+  Renders cycling announcements.
+{% endcomment %}
+
+{%- if section.settings.show_announcement -%}
+  <div class="bg-gradient-to-r from-electric-blue to-indigo-950 text-white py-2 px-4 text-center overflow-hidden border-b border-white/[0.04] relative z-50 js-announcement-bar">
+    <div class="max-w-7xl mx-auto flex items-center justify-center h-4 sm:h-5">
+      <div class="relative w-full overflow-hidden h-4 sm:h-5 flex items-center justify-center">
+        {%- assign announcement_count = 0 -%}
+        {%- if section.settings.announcement_1 != blank -%}
+          {%- assign announcement_count = announcement_count | plus: 1 -%}
+          <p class="text-[9px] sm:text-xs font-semibold tracking-wider uppercase text-center flex items-center gap-2 select-none js-announcement-item absolute transition-all duration-300 opacity-100 transform translate-y-0" data-index="0">
+            {{ section.settings.announcement_1 }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.announcement_2 != blank -%}
+          {%- assign announcement_count = announcement_count | plus: 1 -%}
+          <p class="text-[9px] sm:text-xs font-semibold tracking-wider uppercase text-center flex items-center gap-2 select-none js-announcement-item absolute transition-all duration-300 opacity-0 transform translate-y-4" data-index="1">
+            {{ section.settings.announcement_2 }}
+          </p>
+        {%- endif -%}
+        {%- if section.settings.announcement_3 != blank -%}
+          {%- assign announcement_count = announcement_count | plus: 1 -%}
+          <p class="text-[9px] sm:text-xs font-semibold tracking-wider uppercase text-center flex items-center gap-2 select-none js-announcement-item absolute transition-all duration-300 opacity-0 transform translate-y-4" data-index="2">
+            {{ section.settings.announcement_3 }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Duyuru Çubuğu",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Duyuruları Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_1",
+      "label": "Duyuru 1",
+      "default": "🚀 YENİ DROP: Obsidian Flames Booster Box Stokları Güncellendi!"
+    },
+    {
+      "type": "text",
+      "id": "announcement_2",
+      "label": "Duyuru 2",
+      "default": "💎 TÜM ALIŞVERİŞLERDE: Ücretsiz Sigortalı & Zırhlı Kargo Sınırı ₺2.500!"
+    },
+    {
+      "type": "text",
+      "id": "announcement_3",
+      "label": "Duyuru 3",
+      "default": "🇯🇵 JAPONCA SPESİYAL: Pokémon 151 Booster Pack Sınırlı Sayıda Yayında!"
+    }
+  ]
+}
+{% endschema %}

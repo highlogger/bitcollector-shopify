@@ -1,0 +1,127 @@
+{% comment %}
+  Renders the standard fallback cart page layout.
+{% endcomment %}
+
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+  <h1 class="text-3xl font-extrabold text-white mb-8 border-b border-white/[0.04] pb-4 flex items-center gap-3">
+    <svg class="w-7 h-7 text-electric-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span>{{ 'sections.cart.title' | t }}</span>
+  </h1>
+
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="space-y-6">
+      
+      <!-- Cart items -->
+      <div class="space-y-4">
+        {%- for item in cart.items -%}
+          <div class="flex flex-col sm:flex-row gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04] justify-between items-start sm:items-center">
+            
+            <div class="flex gap-4 items-center">
+              <!-- Item Image -->
+              <div class="relative w-20 h-20 rounded-xl overflow-hidden bg-surface-900 border border-white/[0.06] flex items-center justify-center p-2">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 150 }}"
+                    alt="{{ item.product.title | escape }}"
+                    width="{{ item.image.width }}"
+                    height="{{ item.image.height }}"
+                    class="object-contain w-full h-full"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </div>
+
+              <!-- Item details -->
+              <div>
+                <h3 class="text-sm font-semibold text-white">
+                  <a href="{{ item.url }}" class="hover:text-electric-blue transition-colors">
+                    {{ item.product.title }}
+                  </a>
+                </h3>
+                {%- if item.vendor -%}
+                  <p class="text-[10px] text-muted uppercase mt-0.5">{{ item.vendor }}</p>
+                {%- endif -%}
+                <p class="text-xs text-silver mt-1">{{ item.final_price | money }}</p>
+              </div>
+            </div>
+
+            <!-- Qty adjustments & price info -->
+            <div class="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+              
+              <!-- Qty selector -->
+              <div class="flex items-center bg-white/[0.03] border border-white/[0.06] rounded-lg p-1">
+                <a
+                  href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}"
+                  class="p-1 rounded text-silver hover:text-soft-white hover:bg-white/[0.04] transition-colors"
+                >
+                  <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                </a>
+                <span class="text-xs text-soft-white font-medium px-3">
+                  {{ item.quantity }}
+                </span>
+                <a
+                  href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}"
+                  class="p-1 rounded text-silver hover:text-soft-white hover:bg-white/[0.04] transition-colors"
+                >
+                  <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
+                </a>
+              </div>
+
+              <!-- Price & remove -->
+              <div class="flex items-center gap-4">
+                <span class="text-sm font-bold text-white">
+                  {{ item.final_line_price | money }}
+                </span>
+                
+                <a
+                  href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity=0"
+                  class="p-2 rounded-lg text-muted hover:text-red-400 hover:bg-red-500/10 transition-colors"
+                  aria-label="{{ 'sections.cart.remove' | t }}"
+                >
+                  <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </a>
+              </div>
+
+            </div>
+
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <!-- Footer Checkout columns -->
+      <div class="p-6 rounded-2xl bg-white/[0.01] border border-white/[0.04] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div>
+          <h2 class="text-lg font-bold text-white mb-1">
+            {{ 'sections.cart.subtotal' | t }}: {{ cart.total_price | money }}
+          </h2>
+          <p class="text-xs text-muted leading-relaxed">
+            Kargo ücreti ve vergiler ödeme adımında hesaplanacaktır. Siparişleriniz korumalı zırhlı kutularda gönderilir.
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          name="checkout"
+          class="btn-primary py-3.5 px-8 font-bold text-sm text-center self-stretch md:self-auto"
+        >
+          {{ 'sections.cart.checkout' | t }}
+        </button>
+      </div>
+
+    </form>
+  {%- else -%}
+    <div class="py-20 text-center space-y-4">
+      <p class="text-silver text-sm">{{ 'sections.cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-primary inline-block text-xs">
+        {{ 'sections.cart.continue_shopping' | t }}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Sepet Detay Sayfası",
+  "settings": []
+}
+{% endschema %}

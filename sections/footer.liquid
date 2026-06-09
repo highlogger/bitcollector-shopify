@@ -1,0 +1,441 @@
+{% comment %}
+  Renders the site footer with newsletter, branding info, link lists, contact details, and payment badges.
+  Fully editable via Shopify Customizer.
+{% endcomment %}
+
+<footer class="bg-surface-950 border-t border-white/[0.06] pt-20 pb-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Newsletter Section -->
+    {%- if section.settings.show_newsletter -%}
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-16 border-b border-white/[0.06]">
+        <div class="lg:col-span-6">
+          <h3 class="text-xl sm:text-2xl font-bold text-soft-white mb-2">
+            {{ section.settings.newsletter_title | default: "Koleksiyona Katılın" }}
+          </h3>
+          <p class="text-silver text-sm max-w-md">
+            {{ section.settings.newsletter_desc | default: "Nadir kart düşüşleri, özel indirimler ve koleksiyon güncellemelerinden ilk siz haberdar olun." }}
+          </p>
+        </div>
+        <div class="lg:col-span-6">
+          {%- form 'customer', class: 'flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="relative flex-grow">
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <input
+                type="email"
+                name="contact[email]"
+                placeholder="E-posta adresiniz..."
+                required
+                class="w-full bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.12] focus:border-electric-blue rounded-xl py-3.5 pl-11 pr-4 text-sm text-soft-white outline-none transition-all duration-300"
+              />
+            </div>
+            <button type="submit" class="btn-primary py-3.5 px-8 font-medium text-sm text-center">
+              <span>Abone Ol</span>
+            </button>
+          {%- endform -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- Links & Brand Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 py-16">
+      
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          
+          <!-- Brand Block -->
+          {%- when 'brand' -%}
+            <div class="lg:col-span-4" {{ block.shopify_attributes }}>
+              <a href="{{ routes.root_url }}" class="flex items-center gap-3 mb-6 group">
+                {%- if block.settings.logo != blank -%}
+                  <img
+                    src="{{ block.settings.logo | image_url: width: 150 }}"
+                    alt="{{ shop.name }}"
+                    class="h-8 w-auto object-contain"
+                    loading="lazy"
+                    width="{{ block.settings.logo.width }}"
+                    height="{{ block.settings.logo.height }}"
+                  >
+                {%- else -%}
+                  <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-electric-blue to-soft-purple flex items-center justify-center">
+                    <span class="text-white font-bold text-sm">B</span>
+                  </div>
+                  <span class="text-soft-white font-semibold text-lg tracking-tight group-hover:text-white transition-colors">
+                    {{ block.settings.heading | default: shop.name }}
+                  </span>
+                {%- endif -%}
+              </a>
+              {%- if block.settings.description != blank -%}
+                <p class="text-sm text-silver leading-relaxed mb-6">
+                  {{ block.settings.description }}
+                </p>
+              {%- endif -%}
+              
+              <!-- Trust Badges -->
+              <div class="flex flex-col gap-2.5 mb-6">
+                {%- if block.settings.trust_badge_1 != blank -%}
+                  <div class="flex items-center gap-2 text-xs text-silver">
+                    <svg class="w-4 h-4 text-electric-blue" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2A1 1 0 0 1 20 6v7z"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span>{{ block.settings.trust_badge_1 }}</span>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.trust_badge_2 != blank -%}
+                  <div class="flex items-center gap-2 text-xs text-silver">
+                    <svg class="w-4 h-4 text-soft-purple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <span>{{ block.settings.trust_badge_2 }}</span>
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.trust_badge_3 != blank -%}
+                  <div class="flex items-center gap-2 text-xs text-silver">
+                    <svg class="w-4 h-4 text-emerald-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="13" x="2" y="6" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M2 11h18"/></svg>
+                    <span>{{ block.settings.trust_badge_3 }}</span>
+                  </div>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.show_social -%}
+                <div class="flex items-center gap-3">
+                  {%- if settings.social_instagram_link != blank -%}
+                    <a href="{{ settings.social_instagram_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Instagram">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.social_twitter_link != blank -%}
+                    <a href="{{ settings.social_twitter_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Twitter">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.social_facebook_link != blank -%}
+                    <a href="{{ settings.social_facebook_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Facebook">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.whatsapp_number != blank -%}
+                    <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="WhatsApp">
+                      <svg class="w-4 h-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+          <!-- Link List Block -->
+          {%- when 'link_list' -%}
+            <div class="lg:col-span-2" {{ block.shopify_attributes }}>
+              <h4 class="text-xs font-semibold text-soft-white uppercase tracking-widest mb-6">
+                {{ block.settings.heading | default: "Hızlı Linkler" }}
+              </h4>
+              <ul class="space-y-4">
+                {%- for link in linklists[block.settings.menu].links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="text-sm text-silver hover:text-soft-white transition-colors">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+          <!-- Contact Details Block -->
+          {%- when 'contact' -%}
+            <div class="lg:col-span-3" {{ block.shopify_attributes }}>
+              <h4 class="text-xs font-semibold text-soft-white uppercase tracking-widest mb-6">
+                {{ block.settings.heading | default: "İletişim" }}
+              </h4>
+              <ul class="space-y-4 text-sm text-silver">
+                {%- if block.settings.email != blank -%}
+                  <li class="flex items-center gap-3">
+                    <svg class="w-4 h-4 text-electric-blue shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <a href="mailto:{{ block.settings.email }}" class="hover:text-soft-white transition-colors">{{ block.settings.email }}</a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.phone != blank -%}
+                  <li class="flex items-center gap-3">
+                    <svg class="w-4 h-4 text-soft-purple shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 9.92z"/></svg>
+                    <a href="tel:{{ block.settings.phone }}" class="hover:text-soft-white transition-colors">{{ block.settings.phone }}</a>
+                  </li>
+                {%- endif -%}
+                {%- if block.settings.address != blank -%}
+                  <li class="flex items-start gap-3">
+                    <svg class="w-4 h-4 text-pink-500 shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>{{ block.settings.address }}</span>
+                  </li>
+                {%- endif -%}
+              </ul>
+              {%- if block.settings.show_social -%}
+                <div class="flex items-center gap-3 mt-6">
+                  {%- if settings.social_instagram_link != blank -%}
+                    <a href="{{ settings.social_instagram_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Instagram">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.social_twitter_link != blank -%}
+                    <a href="{{ settings.social_twitter_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Twitter">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.social_facebook_link != blank -%}
+                    <a href="{{ settings.social_facebook_link }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Facebook">
+                      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if settings.whatsapp_number != blank -%}
+                    <a href="https://wa.me/{{ settings.whatsapp_number }}" target="_blank" class="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:border-white/20 text-silver hover:text-white flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="WhatsApp">
+                      <svg class="w-4 h-4 text-emerald-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+
+          <!-- Plain Text Block -->
+          {%- when 'text' -%}
+            <div class="lg:col-span-3" {{ block.shopify_attributes }}>
+              <h4 class="text-xs font-semibold text-soft-white uppercase tracking-widest mb-6">
+                {{ block.settings.heading | default: "Hakkımızda" }}
+              </h4>
+              <p class="text-sm text-silver leading-relaxed">
+                {{ block.settings.content }}
+              </p>
+            </div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="border-t border-white/[0.06] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-xs text-muted">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: "Tüm Hakları Saklıdır." }}
+      </p>
+      
+      {%- if section.settings.show_payment_methods -%}
+        <div class="flex flex-col items-center sm:items-end gap-2">
+          <span class="text-[10px] text-muted uppercase tracking-widest">Kabul Edilen Ödeme Yöntemleri</span>
+          <div class="flex flex-wrap gap-2">
+            {%- for type in shop.enabled_payment_types -%}
+              <div class="w-10 h-6 bg-white/[0.02] border border-white/[0.06] rounded flex items-center justify-center p-1">
+                {{ type | payment_type_svg_tag: class: 'w-full h-full object-contain' }}
+              </div>
+            {%- else -%}
+              <!-- Fallback custom badges -->
+              <span class="px-2.5 py-1 rounded bg-white/[0.02] border border-white/[0.06] text-[10px] text-silver font-medium">Visa</span>
+              <span class="px-2.5 py-1 rounded bg-white/[0.02] border border-white/[0.06] text-[10px] text-silver font-medium">Mastercard</span>
+              <span class="px-2.5 py-1 rounded bg-white/[0.02] border border-white/[0.06] text-[10px] text-silver font-medium">Troy</span>
+              <span class="px-2.5 py-1 rounded bg-white/[0.02] border border-white/[0.06] text-[10px] text-silver font-medium">Havale / EFT</span>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Alt Bilgi (Footer)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Bülten Kayıt Alanı (Newsletter)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Bülten Aboneliğini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Bülten Başlığı",
+      "default": "Koleksiyona Katılın"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_desc",
+      "label": "Bülten Açıklaması",
+      "default": "Nadir kart düşüşleri, özel indirimler ve koleksiyon güncellemelerinden ilk siz haberdar olun."
+    },
+    {
+      "type": "header",
+      "content": "Alt Çubuk Ayarları"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_methods",
+      "label": "Ödeme Yöntemlerini Göster",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Telif Hakkı Ek Metni",
+      "default": "Tüm Hakları Saklıdır."
+    }
+  ],
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Marka Bilgisi",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Başlık (Logo Altı)",
+          "default": "Bit Collector"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Özel Logo Resmi"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Açıklama Metni",
+          "default": "TCG koleksiyonerleri ve yatırımcıları için premium alışveriş deneyimi."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Sosyal Medya İkonlarını Göster",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Güven Rozetleri (Checkmarks)"
+        },
+        {
+          "type": "text",
+          "id": "trust_badge_1",
+          "label": "Rozet 1",
+          "default": "%100 Orijinal TCG"
+        },
+        {
+          "type": "text",
+          "id": "trust_badge_2",
+          "label": "Rozet 2",
+          "default": "Zırhlı Paketleme"
+        },
+        {
+          "type": "text",
+          "id": "trust_badge_3",
+          "label": "Rozet 3",
+          "default": "24 Saatte Kargo"
+        }
+      ]
+    },
+    {
+      "type": "link_list",
+      "name": "Menü (Link Listesi)",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Menü Başlığı",
+          "default": "Hızlı Linkler"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menü Seçin",
+          "default": "main-menu"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "İletişim Bilgileri",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Başlık",
+          "default": "İletişim"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "E-posta Adresi",
+          "default": "info@bitcollector.com"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Telefon Numarası",
+          "default": "+90 555 123 4567"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Adres",
+          "default": "İstanbul, Türkiye"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Sosyal Medya İkonlarını Göster",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Özel Metin",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Başlık",
+          "default": "Hakkımızda"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "İçerik",
+          "default": "Koleksiyonunuzu büyütmek ve korumak için en iyi ürünleri sunuyoruz."
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "brand",
+        "settings": {
+          "heading": "Bit Collector",
+          "description": "TCG koleksiyonerleri ve yatırımcıları için premium alışveriş deneyimi."
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "Hızlı Linkler",
+          "menu": "main-menu"
+        }
+      },
+      {
+        "type": "link_list",
+        "settings": {
+          "heading": "Sözleşmeler & Bilgi",
+          "menu": "footer"
+        }
+      },
+      {
+        "type": "contact",
+        "settings": {
+          "email": "info@bitcollector.com",
+          "phone": "+90 555 123 4567"
+        }
+      }
+    ]
+  }
+}
+{% endschema %}

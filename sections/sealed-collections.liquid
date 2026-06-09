@@ -1,0 +1,86 @@
+{% comment %}
+  Renders kapalı kutu koleksiyonu showcase.
+{% endcomment %}
+
+<section class="section-padding bg-surface-900/30">
+  <div class="max-w-7xl mx-auto">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
+      <div>
+        <span class="text-xs font-medium text-soft-purple uppercase tracking-widest mb-3 block">
+          {{ section.settings.badge | default: "KAPALI KUTU KOLEKSİYONU" }}
+        </span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text">
+          {{ section.settings.title | default: "Kapalı Kutular" }}
+        </h2>
+      </div>
+      <div>
+        {%- assign collection = collections[section.settings.collection] -%}
+        {%- if collection != blank -%}
+          <a
+            href="{{ collection.url }}"
+            class="flex items-center gap-2 text-sm text-silver hover:text-soft-white transition-colors group"
+          >
+            <span>Tüm Kapalı Kutuları Gör</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: section.settings.limit -%}
+          {%- render 'product-card', card_product: product -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback placeholders -->
+        {%- for i in (1..4) -%}
+          <div class="glass-card rounded-2xl overflow-hidden p-4 bg-surface-900/50">
+            <div class="w-full aspect-square bg-surface-800 rounded-xl mb-4 animate-pulse"></div>
+            <div class="h-3 w-1/2 bg-surface-700 rounded mb-2"></div>
+            <div class="h-4 w-3/4 bg-surface-700 rounded mb-4"></div>
+            <div class="h-4 w-1/3 bg-surface-700 rounded"></div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kapalı Kutular (Sealed)",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Üst Başlık (Küçük)",
+      "default": "KAPALI KUTU KOLEKSİYONU"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Başlık",
+      "default": "Kapalı Kutular"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Koleksiyon Seçimi"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 4,
+      "label": "Gösterilecek Ürün Limiti"
+    }
+  ]
+}
+{% endschema %}

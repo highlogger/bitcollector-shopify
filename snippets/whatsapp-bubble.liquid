@@ -1,0 +1,62 @@
+{% comment %}
+  Renders the floating WhatsApp support bubble widget.
+{% endcomment %}
+
+<div class="fixed bottom-6 right-6 z-40 font-sans js-whatsapp-widget">
+  
+  <!-- Popover Panel -->
+  <div class="mb-4 w-72 rounded-2xl border border-white/[0.08] bg-surface-900 shadow-2xl p-4 overflow-hidden relative hidden js-whatsapp-panel transition-all duration-300 transform translate-y-4 opacity-0">
+    <!-- Background lighting -->
+    <div class="absolute inset-0 bg-emerald-500/[0.02] pointer-events-none"></div>
+    
+    <div class="flex items-start justify-between border-b border-white/[0.04] pb-3 mb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <h4 class="text-xs text-white font-bold">Bit Collector Destek</h4>
+          <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Çevrimiçi · Collector Uzmanı
+          </span>
+        </div>
+      </div>
+      <button 
+        type="button"
+        class="p-1 rounded-lg text-silver hover:text-white hover:bg-white/[0.04] transition-colors js-whatsapp-close"
+      >
+        <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <p class="text-xs text-silver leading-relaxed mb-4">
+      Nadir Pokémon kartları, PSA / TCG grading süreçleri veya zırhlı kargo gönderimi hakkında sorularınız mı var? Bize hemen WhatsApp üzerinden yazabilirsiniz.
+    </p>
+
+    {%- assign wa_message = 'Merhaba! Bit Collector üzerinden nadir kartlar hakkında bilgi almak istiyorum.' | url_encode -%}
+    {%- assign wa_number = settings.whatsapp_number | default: '905551234567' -%}
+
+    <a
+      href="https://wa.me/{{ wa_number }}?text={{ wa_message }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(16,185,129,0.2)] transition-all active:scale-[0.98]"
+    >
+      <span>Destek Sohbetini Başlat</span>
+      <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </a>
+  </div>
+
+  <!-- Toggle Button -->
+  <button
+    type="button"
+    class="w-12 h-12 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-transform relative js-whatsapp-toggle"
+    aria-label="WhatsApp Destek"
+  >
+    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-red-500 border border-surface-950 flex items-center justify-center text-[8px] font-bold text-white">
+      1
+    </span>
+  </button>
+</div>

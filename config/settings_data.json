@@ -1,0 +1,71 @@
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "announcement_1": "🚀 YENİ DROP: Obsidian Flames Booster Box Stokları Güncellendi!",
+          "announcement_2": "💎 TÜM ALIŞVERİŞLERDE: Ücretsiz Sigortalı & Zırhlı Kargo Sınırı ₺2.500!",
+          "announcement_3": "🇯🇵 JAPONCA SPESİYAL: Pokémon 151 Booster Pack Sınırlı Sayıda Yayında!"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {},
+        "blocks": {
+          "brand_info": {
+            "type": "brand",
+            "settings": {
+              "heading": "Bit Collector",
+              "description": "TCG koleksiyonerleri ve yatırımcıları için premium alışveriş deneyimi.",
+              "show_social": true,
+              "trust_badge_1": "%100 Orijinal TCG",
+              "trust_badge_2": "Zırhlı Paketleme",
+              "trust_badge_3": "24 Saatte Kargo"
+            }
+          },
+          "menu_1": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Hızlı Linkler",
+              "menu": "main-menu"
+            }
+          },
+          "menu_2": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Kurumsal & Sözleşmeler",
+              "menu": "footer"
+            }
+          },
+          "contact_info": {
+            "type": "contact",
+            "settings": {
+              "heading": "İletişim",
+              "email": "info@bitcollector.com",
+              "phone": "+90 555 123 4567",
+              "address": "İstanbul, Türkiye",
+              "show_social": false
+            }
+          }
+        },
+        "block_order": [
+          "brand_info",
+          "menu_1",
+          "menu_2",
+          "contact_info"
+        ]
+      }
+    },
+    "presets": {
+      "Default": {
+        "social_instagram_link": "https://instagram.com/bitcollector",
+        "whatsapp_number": "905551234567"
+      }
+    }
+  }
+}
