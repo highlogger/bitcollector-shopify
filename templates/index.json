@@ -1,47 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
-        "title": "Nadir TCG Koleksiyonları",
         "subtitle": "Apple × StockX Premium Collector Estetiği",
+        "title": "Nadir TCG Koleksiyonları",
         "description": "Dünyanın en değerli kartları, orijinal lisanslı kapalı kutu ürünler ve koleksiyonunuzu koruyacak birinci sınıf aksesuarlar tek bir adreste.",
         "cta_text": "Koleksiyonu Keşfet",
-        "cta_link": "/collections/all"
+        "cta_link": "/collections/all",
+        "secondary_cta_text": "Yeni Gelenler",
+        "secondary_cta_link": "",
+        "stat1_value": "10K+",
+        "stat1_label": "Nadir Kart",
+        "stat2_value": "4.9★",
+        "stat2_label": "Güven Derecesi",
+        "stat3_value": "24s",
+        "stat3_label": "Hızlı Kargo"
       }
     },
     "featured-singles": {
       "type": "featured-singles",
       "settings": {
-        "title": "Nadir & Değerli Kartlar",
         "badge": "ÖNE ÇIKAN SİNGLE KARTLAR",
-        "collection": "all",
+        "title": "Nadir & Değerli Kartlar",
+        "collection": "koleksiyonluk-kartlar",
         "limit": 6
       }
     },
     "sealed-collections": {
       "type": "sealed-collections",
       "settings": {
-        "title": "Kapalı Kutular",
         "badge": "KAPALI KUTU KOLEKSİYONU",
-        "collection": "all",
+        "title": "Kapalı Kutular",
+        "collection": "sealed-urunler",
         "limit": 4
       }
     },
     "accessories-collections": {
       "type": "accessories-collections",
       "settings": {
-        "title": "Premium Aksesuarlar",
         "badge": "KOLEKSİYONERİN ESASLARI",
-        "collection": "all",
+        "title": "Premium Aksesuarlar",
+        "collection": "aksesuarlar",
         "limit": 4
       }
     },
     "drops-countdown": {
       "type": "drops-countdown",
       "settings": {
-        "title": "Gelecek Drop: Obsidian Flames",
         "badge": "LİMİTLİ STOK",
+        "title": "Gelecek Drop: Obsidian Flames",
         "description": "Obsidian Flames Özel İllüstrasyon Nadir Kartları ve Booster Box Drop Yayını",
         "target_date": "2026-06-15 20:00:00"
       }
@@ -49,15 +66,27 @@
     "recently-added": {
       "type": "recently-added",
       "settings": {
-        "title": "Son Eklenenler",
         "badge": "AZ ÖNCE EKLENDİ",
-        "collection": "all",
+        "title": "Son Eklenenler",
+        "collection": "yeni-gelenler",
         "limit": 6
       }
     },
     "trust-section": {
       "type": "trust-section",
-      "settings": {}
+      "settings": {
+        "badge": "NEDEN BIT COLLECTOR?",
+        "title": "Koleksiyonerlerin Güvendiği Adres",
+        "subtitle": "Her siparişte üst düzey hizmet ve kusursuz kalite standartları.",
+        "p1_title": "Orijinallik Garantisi",
+        "p1_desc": "Tüm kartlar ve kapalı kutular listelenmeden önce uzman ekibimizce orijinallik kontrolünden geçer.",
+        "p2_title": "Özel Zırhlı Paketleme",
+        "p2_desc": "Koleksiyon değerini korumak için ultra korumalı, ezilmeye dayanıklı zırhlı kutularda paketleme.",
+        "p3_title": "Koleksiyoner Odaklı",
+        "p3_desc": "Koleksiyonculuğu anlıyor ve kart kondisyonlarına tam profesyonellikle yaklaşıyoruz.",
+        "p4_title": "24 Saatte Kargo",
+        "p4_desc": "Hafta içi verilen tüm siparişler 24 saat içinde korumalı kargo ile gönderilir."
+      }
     }
   },
   "order": [

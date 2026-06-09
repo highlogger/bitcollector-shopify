@@ -1,21 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "presets": {
+      "Default": {
+        "social_instagram_link": "https://instagram.com/bitcollector",
+        "whatsapp_number": "905551234567"
+      }
+    },
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {
-          "announcement_1": "🚀 YENİ DROP: Obsidian Flames Booster Box Stokları Güncellendi!",
+          "show_announcement": false,
+          "announcement_1": "",
           "announcement_2": "💎 TÜM ALIŞVERİŞLERDE: Ücretsiz Sigortalı & Zırhlı Kargo Sınırı ₺2.500!",
-          "announcement_3": "🇯🇵 JAPONCA SPESİYAL: Pokémon 151 Booster Pack Sınırlı Sayıda Yayında!"
+          "announcement_3": ""
         }
       },
       "header": {
         "type": "header",
-        "settings": {}
+        "custom_css": [],
+        "settings": {
+          "menu": "main-menu"
+        }
       },
       "footer": {
         "type": "footer",
-        "settings": {},
         "blocks": {
           "brand_info": {
             "type": "brand",
@@ -39,7 +57,7 @@
             "type": "link_list",
             "settings": {
               "heading": "Kurumsal & Sözleşmeler",
-              "menu": "footer"
+              "menu": "alt-men-s-zle-meler"
             }
           },
           "contact_info": {
@@ -58,14 +76,16 @@
           "menu_1",
           "menu_2",
           "contact_info"
-        ]
+        ],
+        "settings": {
+          "show_newsletter": true,
+          "newsletter_title": "Koleksiyona Katılın",
+          "newsletter_desc": "Nadir kart düşüşleri, özel indirimler ve koleksiyon güncellemelerinden ilk siz haberdar olun.",
+          "show_payment_methods": true,
+          "copyright_text": "Tüm Hakları Saklıdır."
+        }
       }
     },
-    "presets": {
-      "Default": {
-        "social_instagram_link": "https://instagram.com/bitcollector",
-        "whatsapp_number": "905551234567"
-      }
-    }
+    "content_for_index": []
   }
 }
