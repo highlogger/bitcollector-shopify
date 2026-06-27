@@ -29,6 +29,7 @@
         "type": "header",
         "custom_css": [],
         "settings": {
+          "logo": "shopify://shop_images/rev2.jpg",
           "menu": "main-menu"
         }
       },
